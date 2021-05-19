@@ -24,6 +24,7 @@ namespace joy_sub
     {
         ros::Rate rate(10);
         while(ros::ok()){
+            cmd_vel_pub_.publish(cmd_vel_msg_);
             ros::spinOnce();
             rate.sleep();
         }
@@ -37,8 +38,7 @@ namespace joy_sub
                                                                 msg_raw->axes[3], 
                                                                 msg_raw->axes[4]);
         cmd_vel_msg_.linear.x = msg_raw->axes[1];
-        cmd_vel_msg_.angular.z = msg_raw->axes[3];
-        cmd_vel_pub_.publish(cmd_vel_msg_);
+        cmd_vel_msg_.angular.z = msg_raw->axes[3];        
     }
 
     void JoySubscriber::cmdVelCallback(const geometry_msgs::TwistConstPtr& msg_raw)
